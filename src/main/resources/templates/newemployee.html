@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить швею</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div>
+  <div th:insert="fragments.html::navbar"/>
+  <br><br>
+  <center>
+    <h3>Добавить швею</h3><br>
+    <form th:action="@{/add/employee}" th:method="post" enctype="multipart/form-data">
+      <label>Имя: </label>
+      <input type="text" th:name="firstname"/><br><br>
+      <label>Фамилье: </label>
+      <input type="text" th:name="lastname"/><br><br>
+      <label>Номер телефона: </label>
+      <input type="text" th:name="phone"/><br><br>
+      <label>Логин: </label>
+      <input type="text" th:name="username"/><br><br>
+      <label>Пароль: </label>
+      <input type="password" th:name="password"/><br><br>
+      <label>Фотография: </label>
+      <input type="file" th:name="image" /><br><br>
+      <label>Роль: </label>
+      <select th:name="role">
+        <option th:value="MASTER">Мастер</option>
+        <option th:value="ADVANCED">Опытный</option>
+        <option th:value="MEDIUM">Среднее</option>
+        <option th:value="BEGINNER">Начинающий</option>
+      </select><br><br>
+      <input type="submit" value="Добавить"/>
+    </form><br>
+    <div style="width: 600px" class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+    <div style="width: 600px" class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+  </center>
+  <br><br>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div th:insert="fragments.html::navbar"></div>
+    <br><br>
+    <center>
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        <img th:src="@{/images/profile}" height="200px" style="border-radius: 50%"/>
+                    </td>
+                    <td>
+                        &ensp;&ensp;&ensp;
+                    </td>
+                    <td>
+                        <h1 th:text="${user.getFirstname() + ' ' + user.getLastname()}"></h1><br>
+                        <h3 th:text="'Роль: ' + ${user.getRole()}"></h3>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <hr style="width:600px;">
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        Имя:
+                    </td>
+                    <td>
+                       [(${user.getFirstname()})]
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Фамилье:
+                    </td>
+                    <td>
+                        [(${user.getLastname()})]
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Логин:
+                    </td>
+                    <td>
+                        [(${user.getUsername()})]
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Номер телефона:
+                    </td>
+                    <td>
+                        [(${user.getPhone()})]
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <hr style="width:600px;">
+        <div>
+            <h2>Поменять пароль</h2><br>
+            <form th:action="@{/profile/update}" method="post">
+                <label>Ваш пароль: </label>
+                <input th:name="oldpass" type="password"><br><br>
+                <label>Новый пароль: </label>
+                <input th:name="newpass" type="password"><br><br>
+                <input type="submit" value="Поменять"><br><br>
+                <div style="width: 600px" class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+                <div style="width: 600px" class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+            </form>
+        </div>
+    </center><br><br>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
