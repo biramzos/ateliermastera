@@ -47,20 +47,20 @@
                     <td>
                         <p th:if="${service.getUserByUsername(order.getUsername())} != null" th:text="${service.getUserByUsername(order.getUsername()).getFirstname()} + ' ' + ${service.getUserByUsername(order.getUsername()).getLastname()}"></p>
                         <p th:unless="${service.getUserByUsername(order.getUsername())} != null" th:text="Никто"/>
-                        <div th:each="master:${masters}" th:if="${user.getRole} =='ADMIN'">
+                        <div th:if="${user.getRole} =='ADMIN'">
                             <form th:action="@{'/orders/' + ${order.getId()} + '/for'}" method="post">
                                 <select th:name="username">
                                     <option value="None">Никто</option>
-                                    <option th:value="${master.getUsername()}" th:text="${master.getFirstname()} + ' ' + ${master.getLastname()}"></option>
+                                    <option th:each="master:${masters}" th:value="${master.getUsername()}" th:text="${master.getFirstname()} + ' ' + ${master.getLastname()}"></option>
                                 </select>
                                 <input type="submit" value="Добавить">
                             </form>&ensp;
                         </div>
                         <div th:if="${user.getRole()} != 'ADMIN'">
-                            <form th:action="@{'/orders' + ${order.getId()} +'/forme'}" method="post" th:if="${order.getUsername()} != ${user.getUsername()}">
+                            <form th:action="@{'/orders/' + ${order.getId()} +'/forme'}" method="post" th:if="${order.getUsername()} != ${user.getUsername()}">
                                 <input type="submit" value="Добавить заказ себе"/>
                             </form>
-                            <form th:action="@{'/orders' + ${order.getId()} + '/forme/delete'}" method="post" th:if="${order.getUsername()} == ${user.getUsername()}">
+                            <form th:action="@{'/orders/' + ${order.getId()} + '/forme/delete'}" method="post" th:if="${order.getUsername()} == ${user.getUsername()}">
                                 <input type="submit" value="Не мой заказ"/>
                             </form>&ensp;
                         </div>
